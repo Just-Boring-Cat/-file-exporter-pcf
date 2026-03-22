@@ -60,6 +60,8 @@ Each document object supports:
 
 Full schema details are in [docs/json-schema.md](docs/json-schema.md).
 
+There is no MIME whitelist in the control. It exports whatever text content and metadata the maker provides.
+
 ## Common MIME Types
 
 | File type | Extension | MIME type | Typical use |
@@ -71,6 +73,10 @@ Full schema details are in [docs/json-schema.md](docs/json-schema.md).
 | HTML | `html` | `text/html` | generated markup exports |
 | Markdown | `md` | `text/markdown` | documentation-style exports |
 | TSV | `tsv` | `text/tab-separated-values` | spreadsheet-style exports |
+| SQL | `sql` | `application/sql` | SQL scripts |
+| Python | `py` | `text/x-python` | Python source exports |
+| C# | `cs` | `text/x-csharp` | C# source exports |
+| JavaScript | `js` | `application/javascript` | JavaScript source exports |
 | PDF | `pdf` | `application/pdf` | only if your content is already valid PDF data |
 
 More examples are listed in [docs/mime-types.md](docs/mime-types.md).
@@ -81,21 +87,31 @@ Component in Canvas:
 
 ![File Exporter Component preview](docs/images/file-exporter-component-1.jpeg)
 
+Canvas app view of the File Exporter Component with the export button rendered in the app screen.
+
 Documents JSON property:
 
 ![Documents JSON property](docs/images/file-exporter-component-2-documentsJson.jpeg)
+
+`documentsJson` input where makers provide one JSON array containing all document definitions.
 
 Download mode property:
 
 ![Download mode property](docs/images/file-exporter-component-3-download-modes.jpeg)
 
+`downloadMode` input showing the three built-in behaviors: `Disabled`, `Zip`, and `Separate`.
+
 Documents output JSON:
 
 ![Documents output JSON property](docs/images/file-exporter-component-4-documentsOutputJson.jpeg)
 
+`documentsOutputJson` output containing processed document metadata, Base64, and validation state.
+
 Output properties:
 
 ![Output properties](docs/images/file-exporter-component-5-output-properties.jpeg)
+
+Status outputs that let Canvas formulas and Flows react to validation, click state, and output changes.
 
 ## Key Features
 
@@ -112,6 +128,7 @@ Output properties:
 - `Zip` is the most reliable built-in browser download mode.
 - `Separate` is best-effort because browsers and hosts may limit multi-download behavior.
 - `archiveFileName` is only used for ZIP mode.
+- The control does not validate against a MIME whitelist. It exports whatever text content and metadata the maker provides.
 - The control does not upload anything by itself. External storage happens through the host app or Flow.
 
 ## Quick Start
